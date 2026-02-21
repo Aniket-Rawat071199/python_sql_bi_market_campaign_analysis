@@ -109,6 +109,16 @@ The Power BI dashboard includes:
 
 ---
 
+
+##  Marketing Campaign Dashboard
+
+![Dashboard](https://raw.githubusercontent.com/Aniket-Rawat071199/python_sql_bi_market_campaign_analysis/main/visuals.png)
+
+
+---
+
+
+
 #  Strategic Recommendations
 
 ## 1️⃣ Optimize, Don’t Just Expand
@@ -159,7 +169,7 @@ This highlights the importance of optimization-driven strategy rather than budge
 
 ---
 
-# 🛠 Tools & Technologies Used
+# Tools & Technologies Used
 
 - Python
 - SQL
@@ -171,7 +181,7 @@ This highlights the importance of optimization-driven strategy rather than budge
 
 ---
 
-# 📌 Conclusion
+#  Conclusion
 
 The analysis demonstrates that marketing profitability is influenced by:
 
@@ -185,7 +195,7 @@ Data-driven optimization can significantly enhance marketing ROI and reduce budg
 
 ---
 
-# 👨‍💻 Author
+#  Author
 
 Aniket Rawat  
 Aspiring Data Analyst | SQL | Python | Power BI  
@@ -193,7 +203,10 @@ Focused on business-driven analytics and performance optimization.
 
 Gmail : arvianshrwt1999@gmail.com
 
-Linkedin : 
+Linkedin : www.linkedin.com/in/aniket-rawat-44a6b63aa
+
+
+Github : https://github.coom/Aniket-Rawat071199
 
 
 
