@@ -1,0 +1,172 @@
+Create database campaign_dataset;
+use  campaign_dataset;
+Alter Table campaign_dataset rename to dataset;
+Select * From dataset;
+
+## Which Channel Generates Highest ROI?
+Create View avg_roi_by_channels as
+Select channel_used, 
+Round(AvG(roi),2) as avg_roi
+from  dataset
+group by channel_used
+order by avg_roi desc;
+
+select * from avg_roi_by_channels;
+
+
+## Which Campaign Type Has Best Conversion Rate?
+Create view avg_conversion_rate_by_channels as
+Select campaign_type, 
+Round(Avg(conversion_rate),4) as Avg_conversion_rate
+from dataset
+group by campaign_type
+order by Avg_conversion_rate desc;
+
+select * from avg_conversion_rate_by_channels;
+
+
+## Which Location Generates Highest Total Profit?
+create view profit_by_location as 
+Select location ,
+Round(Sum(acquisition_cost * (roi/100)),2) as Total_profits
+from dataset
+group by location
+order by Total_profits desc;
+
+Select * from profit_by_location;
+
+
+## Which Customer Segment Is Most Profitable?
+Create view  profit_by_segment as 
+Select customer_segment,
+Round(SUM(acquisition_cost * roi/100),2) as total_profit
+from dataset
+group by customer_segment
+order by total_profit desc;
+
+Select * from profit_by_segment;
+
+
+## What Is the Best Campaign Duration?
+Create View Best_campaign_durations as 
+Select campaign_type, 
+Round(Avg(duration),2) as Avg_duration,
+Round(Avg(roi),2) as Avg_roi
+from dataset
+group by campaign_type
+order by Avg_duration desc;
+
+
+select * from Best_campaign_durations;
+
+
+
+
+## Monthly Performance Trend
+Create view Monthly_performance as
+SELECT month ,
+Round(Avg(roi),2) as Avg_roi
+from dataset
+group by month
+order by Avg_roi desc;
+
+Select * from Monthly_performance;
+
+
+#Which Company Has Most Efficient Cost Structure? (Lowest CPC)
+Create view company_with_avg_CPC as 
+Select company , 
+round(Avg(cpc),2) as Avg_cpc
+from dataset
+group by company
+order by Avg_cpc desc;
+
+Select * from  company_with_avg_CPC;
+
+
+
+## High Cost but Low Conversion Campaigns (Problem Area)
+
+Create View problematic_campaigns as
+SELECT *
+FROM dataset
+WHERE acquisition_cost > 
+(SELECT AVG(acquisition_cost) FROM dataset)
+AND conversion_rate < (SELECT AVG(conversion_rate) FROM
+ dataset);
+ 
+ select * from problematic_campaigns;
+ 
+ 
+ ## Channel with High CTR but Low ROI
+ create view channels_performance as
+ Select channel_used,
+ Round(Avg(ctr),2) as Avg_ctr,
+ Round(Avg(roi),2) as Avg_roi
+ from dataset
+ group by channel_used
+ order by Avg_ctr desc;
+ 
+ select * from channels_performance;
+ 
+ 
+ ##Top 5 Worst Performing Campaigns
+ Create view worst_performer as
+ Select * 
+ from dataset
+ order by roi 
+ limit 5;
+ 
+ Select * from worst_performer;
+ 
+ 
+ 
+ ## Which Age Group Generates Highest ROI?
+ Create view roi_by_age_group as
+ Select 
+ Concat(age_min,'-',age_max) as age_group,
+ Round(AVG(roi),2) as avg_roi
+ from dataset
+ group by age_group
+ order by avg_roi desc;
+ 
+ select * from roi_by_age_group;
+ 
+ 
+ ## Which Gender Converts Better?
+ 
+ Create view Conversion_rates_by_gender as
+ Select 
+ Gender,
+ Round(Avg(conversion_rate),4) as Avg_conversion_rate,
+ Round(Avg(roi),2) as Avg_roi
+ from dataset
+ group by gender 
+ order by avg_roi;
+ 
+ Select * from Conversion_rates_by_gender;
+ 
+ 
+ ## Which Quarter Performs Best?
+ Create view quarter_performance as 
+ Select 
+ quarter,
+ Round(Avg(cpc),2) as avg_cpc
+ from dataset
+ group by quarter
+ order by avg_cpc desc;
+ 
+ select * from quarter_performance;
+ 
+ 
+## Best Performing Campaign Type for Each Gender
+Create view Best_performing_campaign_type as
+SELECT 
+    gender,
+    campaign_type,
+    Round(AVG(roi),2) AS avg_roi
+FROM dataset
+GROUP BY gender, campaign_type
+ORDER BY gender, avg_roi DESC;
+
+Select * from Best_performing_campaign_type;
